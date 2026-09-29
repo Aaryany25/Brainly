@@ -1,8 +1,8 @@
 import express from "express";
-import AuthMiddleware from "./Middleware/AuthMiddleware.js";
+// import AuthMiddleware from "./Middleware/AuthMiddleware.js";
 import UserRouter from "./routes/User.routes.js";
 import cookieParser from "cookie-parser";
-
+import NotesRouter from "./routes/Notes.routes.js";
 // app.use(express.json());
 const app =express();
 
@@ -20,25 +20,26 @@ app.use("/api/v1/user",UserRouter)
 app.post("/api/v1/logout",(req,res)=>{
 
 })
-app.get("/api/v1/create-note",AuthMiddleware,(req,res)=>{
-res.status(200).json({
-    success:true,
-    message:"Note Created Successfully"
-})})
-app.get("/api/v1/get-notes",(req,res)=>{
+app.use('api/v1/notes',NotesRouter)
+// app.get("/api/v1/create-note",AuthMiddleware,(req,res)=>{
+// res.status(200).json({
+//     success:true,
+//     message:"Note Created Successfully"
+// })})
+// app.get("/api/v1/get-notes",(req,res)=>{
 
-})
+// })
 
-app.put("/api/v1/update-note",(req,res)=>{
+// app.put("/api/v1/update-note",(req,res)=>{
 
-})
+// })
 
-app.delete("/api/v1/delete-note",(req,res)=>{
-})
+// app.delete("/api/v1/delete-note",(req,res)=>{
+// })
 
-app.patch("/api/v1/share",(req,res)=>{
+// app.patch("/api/v1/share",(req,res)=>{
 
-})
+// })
 
 
 
