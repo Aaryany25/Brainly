@@ -1,24 +1,15 @@
 import express from "express";
-
+import AuthMiddleware from "./Middleware/AuthMiddleware.js";
 import UserRouter from "./routes/User.routes.js";
+import cookieParser from "cookie-parser";
+
+// app.use(express.json());
 const app =express();
 
 app.use(express.json())
+app.use(cookieParser());
 
 
-const GenerateToken = async function(UserId){
-try{
-    const user = await User.findById(UserId);
-    const accessToken = await user.generateToken()
-    const refreshToken = await user.generateRefreshToken()
-    user.refreshToken=refreshToken;
-    await user.save({validateBeforeSave:false})
-    return {accessToken,refreshToken}
-}
-catch(error){
-    console.error(error);
-}
-}
 app.get("/",(req,res)=>{
     res.send("Hello World");
 });
@@ -29,9 +20,11 @@ app.use("/api/v1/user",UserRouter)
 app.post("/api/v1/logout",(req,res)=>{
 
 })
-app.post("/api/v1/create-note",(req,res)=>{
-
-})
+app.get("/api/v1/create-note",AuthMiddleware,(req,res)=>{
+res.status(200).json({
+    success:true,
+    message:"Note Created Successfully"
+})})
 app.get("/api/v1/get-notes",(req,res)=>{
 
 })

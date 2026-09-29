@@ -18,14 +18,14 @@ UserSchema.pre("save",async function(next){
     return await bcrypt.compare(password,this.password)
  }
 UserSchema.methods.generateToken = async function(){
-    jwt.sign({
+   return jwt.sign({
         id:this.id,
         username:this.username
     },process.env.JWT_SECRET,{expiresIn:"1day"
     })
 }
 UserSchema.methods.generateRefreshToken = async function(){
-    jwt.sign({
+  return  jwt.sign({
         id:this.id
     },process.env.REFRESH_SECRET,{expiresIn:"7days"
     })
