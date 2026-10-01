@@ -1,6 +1,6 @@
 import { ContentSchema } from "../validators/validation.js";
-import { Content } from "../Modals/Content.modal.js";
-import {Tag} from "../Modals/Tags.modal.js";
+import Content from "../modals/Content.modal.js";
+import Tag from "../modals/Tags.modal.js";
 
 
 // Add content Functionality 

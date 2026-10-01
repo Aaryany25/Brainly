@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const TagSchema = new Schema({
-    name:{type:string, required:true},
+    name:{type:String, required:true},
     // userId:{type:Schema.Types.ObjectId, ref:'User', required:true},
 })
 const Tag = mongoose.model('Tag', TagSchema);
