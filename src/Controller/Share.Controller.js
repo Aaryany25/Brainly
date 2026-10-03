@@ -13,3 +13,5 @@ const ShareNote = async(req,res)=>{
     }
     res.json({message:"success"})
 }
+
+export {ShareNote}

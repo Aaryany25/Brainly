@@ -3,6 +3,7 @@ import express from "express";
 import UserRouter from "./routes/User.routes.js";
 import cookieParser from "cookie-parser";
 import NotesRouter from "./routes/Notes.routes.js";
+import ShareRouter from "./routes/Share.routes.js";
 // app.use(express.json());
 const app =express();
 
@@ -21,6 +22,7 @@ app.post("/api/v1/logout",(req,res)=>{
 
 })
 app.use('api/v1/notes',NotesRouter)
+app.use('api/v1/share',ShareRouter)
 // app.get("/api/v1/create-note",AuthMiddleware,(req,res)=>{
 // res.status(200).json({
 //     success:true,
