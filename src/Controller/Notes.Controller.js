@@ -1,4 +1,4 @@
-import { ContentSchema } from "../validators/validation.js";
+// import { ContentSchema } from "../validators/validation.js";
 import Content from "../modals/Content.modal.js";
 import Tag from "../modals/Tags.modal.js";
 
@@ -7,18 +7,21 @@ import Tag from "../modals/Tags.modal.js";
 
 const Addcontent = async(req,res)=>{
     try{
-        const {title,link,type,tags} =ContentSchema.parse(req.body);
+        const {title,link,type,tags} =req.body;
+        const userId =req.user._id
         if(!title || !link ){
-            return res.status(400).json({message:"Title and link are required",success:false})
+            return res.status(400).json({success:false})
         }
 
-        // if(!type){
-        //     await Tag.create({
-        //         name:tags,
-        //         user:req.user._id
-        //     })
-        // }
-        const content = await Content.create({title,link,type,tags})
+      let tag  = await Tag.findOne({name:tags})
+      if(!tag){
+         tag = await Tag.create({
+           name: tags
+        })
+        // return tag._id
+      }
+        // console.log("Added")
+        const content = await Content.create({title,link,type,userId,tags:tag._id})
         return res.status(201).json({message:"Content added successfully",success:true,content})
         
     }catch(error){
@@ -34,9 +37,7 @@ const GetContent = async(req,res)=>{
             return res.status(404).json({message:"user Id is missing",success:false})
         }
 
-       
-
-        const content = await Content.find({user:userId}).skip(skip).limit(limit)
+        const content = await Content.find({user:userId})
         return res.status(200).json({message:"Content fetched successfully",success:true,content})
     }
     catch(error){

@@ -21,8 +21,8 @@ app.use("/api/v1/user",UserRouter)
 app.post("/api/v1/logout",(req,res)=>{
 
 })
-app.use('api/v1/notes',NotesRouter)
-app.use('api/v1/share',ShareRouter)
+app.use('/api/v1/notes',NotesRouter)
+app.use('/api/v1/share',ShareRouter)
 // app.get("/api/v1/create-note",AuthMiddleware,(req,res)=>{
 // res.status(200).json({
 //     success:true,

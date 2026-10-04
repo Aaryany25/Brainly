@@ -62,6 +62,15 @@ const Login= async (req,res)=>{
         const {accesstoken,refreshtoken} = await GenerateToken(existUser._id)
         const loggedInUser = await User.findById(existUser._id).select("-password -refreshToken")
 
+        const cookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
+// res.cookie("token", token, cookieOptions);
+
         return res.status(200).cookie("accesstoken",accesstoken,cookieOptions)
     .cookie("refreshtoken",refreshtoken,cookieOptions).json({
             message:"User Logged In Successfully",

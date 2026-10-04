@@ -3,7 +3,7 @@ import User from "../modals/User.modal.js";
 const AuthMiddleware = async(req,res,next)=>{
     try{
 const token = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ","")
-console.log("Token:", token);
+// console.log("Token:", token);
 if(!token){
     res.status(401).json({
         success:false,
@@ -19,6 +19,7 @@ if(!user){
     })
 }
 req.user = user;
+console.log(req.user)
 next()
     }
     catch(error){
