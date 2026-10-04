@@ -37,7 +37,7 @@ const GetContent = async(req,res)=>{
             return res.status(404).json({message:"user Id is missing",success:false})
         }
 
-        const content = await Content.find({user:userId})
+        const content = await Content.find({userId:userId})
         return res.status(200).json({message:"Content fetched successfully",success:true,content})
     }
     catch(error){
