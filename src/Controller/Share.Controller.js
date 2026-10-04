@@ -4,7 +4,7 @@ const ShareNote = async(req,res)=>{
     const share = req.body
 
     if(share){
-       await LinkModel.create({
+         await LinkModel.create({
             userId:req.user._id,
             hash:random(10)
         })
